@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchMovies } from "../../Redux/slices/moviesSlice";
+import { fetchMovies, clearFilters } from "../../Redux/slices/moviesSlice";
 import { useLocation } from "react-router-dom";
 import FavoriteMovies from "./FavoriteMoviesList";
 import LoadingMovies from "./LoadingMovies";
 import WeHaveProblem from "./WeHaveProblem";
 import MoviesCards from "./MoviesCards";
 
-export default function MoviesList(props) {
-  const a = useLocation();
-
+export default function MoviesList() {
+  const location = useLocation();
   const dispatch = useDispatch();
-  const { status } = useSelector((store) => store.movies);
 
+  const { status } = useSelector((store) => store.movies);
   const [timeOut, setTimeOut] = useState(false);
+  const [isFiltersCleared, setIsFiltersCleared] = useState(false);
 
   useEffect(() => {
     dispatch(fetchMovies());
@@ -25,21 +25,36 @@ export default function MoviesList(props) {
     return () => clearTimeout(timeOutId);
   }, [dispatch]);
 
+  // Очищаем фильтры при переходе на избранное
+  useEffect(() => {
+    if (location.pathname === "/favorites") {
+      dispatch(clearFilters());
+      // Дадим один тик на очистку
+      setTimeout(() => {
+        setIsFiltersCleared(true);
+      }, 0);
+    } else {
+      setIsFiltersCleared(true); // не favorites — можно сразу показывать
+    }
+  }, [location.pathname, dispatch]);
+
+  const isFavoritesPage = location.pathname === "/favorites";
+
   return (
-    <>
-      <div id="movies" className="movies anchor">
-        {a.pathname === "/favorites" ? (
+    <div id="movies" className="movies anchor">
+      {isFavoritesPage ? (
+        isFiltersCleared ? (
           <FavoriteMovies />
-        ) : status === "loading" ? (
-          timeOut ? (
-            <WeHaveProblem />
-          ) : (
-            <LoadingMovies />
-          )
+        ) : null // ничего не рендерим до очистки
+      ) : status === "loading" ? (
+        timeOut ? (
+          <WeHaveProblem />
         ) : (
-          <MoviesCards />
-        )}
-      </div>
-    </>
+          <LoadingMovies />
+        )
+      ) : (
+        <MoviesCards />
+      )}
+    </div>
   );
 }

@@ -717,3 +717,79 @@ main > video {
     background-color: #B7140F;
     color: white;
 }
+
+/*модалка */
+/* Задний затемнённый фон */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Полупрозрачный чёрный */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  
+  /* Сама модалка */
+  .modal {
+    background-color: #1e1e1e;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    color: white;
+    max-width: 400px;
+    width: 100%;
+    animation: scaleUp 0.3s ease forwards;
+  }
+  
+  /* Кнопки внутри модалки */
+  .modal-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .modal-buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: #3498db;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .modal-buttons button:hover {
+    background-color: #2980b9;
+  }
+  
+  .close-button {
+    margin-top: 15px;
+    background: none;
+    border: none;
+    color: #aaa;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .close-button:hover {
+    color: white;
+  }
+  
+  /* Анимация появления */
+  @keyframes scaleUp {
+    from {
+      transform: scale(0.8);
+      opacity: 0;
+    }
+    to {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  

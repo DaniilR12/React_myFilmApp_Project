@@ -13,7 +13,8 @@ const initialState = {
         error: null,
     },
     filteredMovies: [],
-    filterMoviesCategories: []
+    filterMoviesCategories: [],
+    filtersCleared:false
 }
 
 export const fetchMovies = createAsyncThunk('movie/fetchmovies', () => {
@@ -48,12 +49,18 @@ const moviesSlice = createSlice({
             }
             const searchFilms = state.films.filter(movie=> movie.category.includes(action.payload))
             state.filterMoviesCategories = searchFilms
+        },
+        clearFilters: (state)=>{
+            state.filterMoviesCategories=[]
+            state.filteredMovies = []
+            state.filtersCleared= true
         }
 
     },
     extraReducers: (builder) => {
         builder.addCase(fetchMovies.pending, (state) => {
             state.status = 'loading';
+            state.filtersCleared = false
         })
             .addCase(fetchMovies.fulfilled, (state, action) => {
                 state.films = action.payload;
@@ -69,4 +76,4 @@ const moviesSlice = createSlice({
 })
 
 export default moviesSlice.reducer
-export const { searchFilmInState, filterMovies, searchCategoriesFilms } = moviesSlice.actions
+export const { searchFilmInState, filterMovies, searchCategoriesFilms,clearFilters } = moviesSlice.actions

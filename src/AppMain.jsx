@@ -8,6 +8,7 @@ import Error404 from "./Pages/Error404";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchMovies } from "./Redux/slices/moviesSlice";
+import Auth from "./Pages/Auth";
 
 export default function AppMain() {
   const dispatch = useDispatch();
@@ -23,6 +24,7 @@ export default function AppMain() {
         <Route path="/" element={<Home />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/movie/:id" element={<Movie />} />
+        <Route path="/authorization" element={<Auth/>}/>
         <Route path="*" element={<Error404 />} />
       </Routes>
       <Footer />
