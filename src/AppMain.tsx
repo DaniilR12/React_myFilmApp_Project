@@ -9,12 +9,18 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchMovies } from "./Redux/slices/moviesSlice";
 import Auth from "./Pages/Auth";
+import { initFavorites } from "./Redux/slices/favoritesSlice";
+import { AppDispatch } from "./Redux/store";
 
 export default function AppMain() {
-  const dispatch = useDispatch();
+  const dispatch:AppDispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchMovies());
+    const currentUser = JSON.parse(localStorage.getItem("currentUser")||'{}');
+    if (currentUser) {
+      dispatch(initFavorites(currentUser.email)); // ✅ Теперь slice будет знать currentUser
+    }
   }, [dispatch]);
 
   return (

@@ -2,14 +2,20 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/icons/pngwing.com.png";
 import heart from "../../assets/icons/icons8-червы-100.png";
 import { useSelector } from "react-redux";
+import { RootState } from "../../Redux/store";
 
 export default function Header() {
-  const { favoritesMovies } = useSelector((store) => store.favoritesSlice);
+  const { favoritesMovies } = useSelector(
+    (store: RootState) => store.favoritesSlice
+  );
+
+  const rawUser:string|null = localStorage.getItem("currentUser");
+  const currentUser = rawUser ? JSON.parse(rawUser) : {};
+  const login = currentUser?.login;
 
   const token = localStorage.getItem("token");
-  const userName = JSON.parse(localStorage.getItem("user") || "null");
 
-  const handleLogout = () => {
+  const handleLogout = ():void => {
     localStorage.removeItem("token");
     window.location.href = "/";
   };
@@ -38,7 +44,7 @@ export default function Header() {
                 <img src={heart} alt="" />
                 <p>{favoritesMovies.length}</p>
               </div>
-              <Link to="/favorites">Hello {userName?.login}</Link>
+              <Link to="/favorites">Hello {login}</Link>
               <button
                 style={{
                   borderRadius: 7,

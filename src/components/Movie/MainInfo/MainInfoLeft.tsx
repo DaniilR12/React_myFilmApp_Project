@@ -1,22 +1,39 @@
-import { addFavoritesMovie, removeFavoritesMovie } from "../../../Redux/slices/favoritesSlice";
+import { addFavoritesMovie, removeFavoritesMovie, initFavorites } from "../../../Redux/slices/favoritesSlice";
 import Rating from "../Rating";
 import { useDispatch } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { AppDispatch } from "../../../Redux/store";
+import { Movie } from "../../../Redux/slices/moviesSlice";
 
-export default function MainInfoLeft(props) {
-  const dispatch = useDispatch();
+export interface MainInfoLeftProps {
+  searchFilm: {
+    status: string;
+    film: Movie | null;
+  };
+}
+
+export default function MainInfoLeft({searchFilm}:MainInfoLeftProps) {
+  const dispatch:AppDispatch = useDispatch();
   const navigate = useNavigate();
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const currentUser = JSON.parse(localStorage.getItem("currentUser")||"null");
 
-  if (props.searchFilm.status === "loading" || !props.searchFilm.film) {
+  useEffect(() => {
+    // При монтировании компонента инициализируем пользователя
+    if (currentUser) {
+      dispatch(initFavorites(currentUser.email)); // ✅ Теперь slice будет знать currentUser
+    }
+  }, [dispatch]);
+
+  if (searchFilm.status === "loading" || !searchFilm.film) {
     return <p>Loading...</p>;
   }
 
-  const dataFilm = props.searchFilm.film;
-  const token = localStorage.getItem("token");
+  const dataFilm = searchFilm.film;
 
   function addFavoriteMov() {
+    const token = localStorage.getItem("token");
     if (token) {
       dispatch(addFavoritesMovie(dataFilm));
     } else {
@@ -25,6 +42,7 @@ export default function MainInfoLeft(props) {
   }
 
   function removeFavoriteMov() {
+    const token = localStorage.getItem("token");
     if (token) {
       dispatch(removeFavoritesMovie(dataFilm));
     } else {
@@ -45,7 +63,7 @@ export default function MainInfoLeft(props) {
         </div>
         <div className="main__info-left-title">
           <p>{dataFilm.title}</p>
-          <Rating />
+          <Rating movieId={dataFilm.id} userId={currentUser.email} />
         </div>
         <div className="main__info-left-categoryes">
           {dataFilm.categoryes.map((value, index) => (

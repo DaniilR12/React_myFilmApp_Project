@@ -6,12 +6,13 @@ import FavoriteMovies from "./FavoriteMoviesList";
 import LoadingMovies from "./LoadingMovies";
 import WeHaveProblem from "./WeHaveProblem";
 import MoviesCards from "./MoviesCards";
+import { AppDispatch, RootState } from "../../Redux/store";
 
 export default function MoviesList() {
   const location = useLocation();
-  const dispatch = useDispatch();
+  const dispatch:AppDispatch = useDispatch();
 
-  const { status } = useSelector((store) => store.movies);
+  const { status } = useSelector((store:RootState) => store.movies);
   const [timeOut, setTimeOut] = useState(false);
   const [isFiltersCleared, setIsFiltersCleared] = useState(false);
 

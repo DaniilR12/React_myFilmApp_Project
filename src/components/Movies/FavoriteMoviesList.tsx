@@ -1,15 +1,19 @@
 import { useDispatch, useSelector } from "react-redux";
 import MoviesCard from "./MoviesCard";
 import { useEffect } from "react";
-import { clearFilters } from "../../Redux/slices/moviesSlice";
+import { clearFilters, Movie } from "../../Redux/slices/moviesSlice";
+import { RootState } from "../../Redux/store";
 
 export default function FavoriteMovies() {
   const dispatch = useDispatch();
 
-  const { favoritesMovies } = useSelector((store) => store.favoritesSlice);
+  const { favoritesMovies } = useSelector(
+    (store: RootState) => store.favoritesSlice
+  );
 
-  const { filterMoviesCategories, filteredMovies } =
-    useSelector((store) => store.movies);
+  const { filterMoviesCategories, filteredMovies } = useSelector(
+    (store: RootState) => store.movies
+  );
 
   useEffect(() => {
     dispatch(clearFilters());
@@ -28,12 +32,13 @@ export default function FavoriteMovies() {
     .map((id) => baseList.find((movie) => movie.id === id))
     .filter(Boolean);
 
- 
-
   return (
     <>
       {moviesToShow.length > 0 ? (
-        moviesToShow.map((movie) => <MoviesCard key={movie.id} {...movie} />)
+        moviesToShow.map((movie) => {
+          if (!movie) return null;
+          return <MoviesCard key={movie.id} {...movie} />;
+        })
       ) : (
         <p>You don't have favorite movies.</p>
       )}

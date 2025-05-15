@@ -10,17 +10,33 @@ const Auth = () => {
     e.preventDefault();
 
     if (isLogin) {
-      const savedUser = JSON.parse(localStorage.getItem("user") || "{}");
+      // Вход
+      const savedUsers = JSON.parse(localStorage.getItem("users") || "[]");
+      const user = savedUsers.find(
+        (u: any) => u.email === email && u.password === password
+      );
 
-      if (email === savedUser.email && password === savedUser.password) {
+      if (user) {
         localStorage.setItem("token", "mock-token");
-        alert(`Hello, ${savedUser.login}`);
+        localStorage.setItem("currentUser", JSON.stringify(user)); // Сохраняем текущего пользователя
+        alert(`Hello, ${user.login}`);
         window.location.href = "/";
       } else {
         alert("Not correct email or password");
       }
     } else {
-      localStorage.setItem("user", JSON.stringify({ login, email, password }));
+      // Регистрация
+      const savedUsers = JSON.parse(localStorage.getItem("users") || "[]");
+
+      // Проверка на уже существующего пользователя
+      const isExist = savedUsers.some((u: any) => u.email === email);
+      if (isExist) {
+        alert("User already exists with this email!");
+        return;
+      }
+
+      savedUsers.push({ login, email, password });
+      localStorage.setItem("users", JSON.stringify(savedUsers));
       alert("Correct registration");
       setIsLogin(true);
     }
@@ -42,9 +58,7 @@ const Auth = () => {
             paddingTop: 5,
           }}
         >
-          {isLogin ? (
-            ""
-          ) : (
+          {!isLogin && (
             <input
               onChange={(e) => setLogin(e.target.value)}
               style={{
@@ -57,6 +71,7 @@ const Auth = () => {
               }}
               type="text"
               placeholder="Login"
+              required
             ></input>
           )}
 
@@ -70,8 +85,9 @@ const Auth = () => {
               paddingLeft: 10,
               width: 150,
             }}
-            type="text"
+            type="email"
             placeholder="Email"
+            required
           ></input>
           <input
             onChange={(e) => setPassword(e.target.value)}
@@ -85,6 +101,7 @@ const Auth = () => {
             }}
             type="password"
             placeholder="Password"
+            required
           ></input>
           <button
             style={{ width: 100, border: "none", height: 20, borderRadius: 10 }}
@@ -94,37 +111,22 @@ const Auth = () => {
         </form>
 
         <div style={{ paddingTop: 10 }}>
-          {isLogin ? (
-            <button
-              onClick={() => setIsLogin(!isLogin)}
-              style={{
-                background: "none",
-                border: "none",
-                padding: 0,
-                margin: 0,
-                color: "white",
-                cursor: "pointer",
-                textDecoration: "underline",
-              }}
-            >
-              Already have an account?
-            </button>
-          ) : (
-            <button
-              onClick={() => setIsLogin(!isLogin)}
-              style={{
-                background: "none",
-                border: "none",
-                padding: 0,
-                margin: 0,
-                color: "white",
-                cursor: "pointer",
-                textDecoration: "underline",
-              }}
-            >
-              You don`t have an account?
-            </button>
-          )}
+          <button
+            onClick={() => setIsLogin(!isLogin)}
+            style={{
+              background: "none",
+              border: "none",
+              padding: 0,
+              margin: 0,
+              color: "white",
+              cursor: "pointer",
+              textDecoration: "underline",
+            }}
+          >
+            {isLogin
+              ? "You don't have an account?"
+              : "Already have an account?"}
+          </button>
         </div>
       </div>
     </>

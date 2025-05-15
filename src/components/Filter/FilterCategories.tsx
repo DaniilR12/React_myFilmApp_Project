@@ -1,10 +1,10 @@
 import { useState } from "react";
 
 
-export default function FilterCategories() {
-  const [active, setActive] = useState("Popular");
+const FilterCategories=()=>{
+  const [active, setActive] = useState<string>("Popular");
 
-  let filter_categoryes = ["Popular", "Novelty", "Featured", "Short films"];
+  let filter_categoryes:string[] = ["Popular", "Novelty", "Featured", "Short films"];
 
   return (
     <>
@@ -28,3 +28,5 @@ export default function FilterCategories() {
     </>
   );
 }
+
+export default FilterCategories

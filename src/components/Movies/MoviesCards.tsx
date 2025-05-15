@@ -2,14 +2,15 @@ import { useDispatch, useSelector } from "react-redux";
 import MoviesCard from "./MoviesCard";
 import { useEffect } from "react";
 import { clearFilters } from "../../Redux/slices/moviesSlice";
+import { AppDispatch, RootState } from "../../Redux/store";
 
 export default function MoviesCards() {
-  const dispatch = useDispatch();
+  const dispatch:AppDispatch = useDispatch();
   useEffect(() => {
     dispatch(clearFilters());
   }, [dispatch]);
   const { films, filteredMovies, filterMoviesCategories } = useSelector(
-    (store) => store.movies
+    (store:RootState) => store.movies
   );
   const moviesToShow = filteredMovies.length > 0 ? filteredMovies : films;
 
