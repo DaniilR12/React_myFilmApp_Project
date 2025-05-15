@@ -1,6 +1,10 @@
+import React from "react"
 import ContentLoader from "react-content-loader"
+import { SkeletonProps } from "./SkeletonLoadingTrailer"
 
-const SkeletonFilm = (props) => (
+
+
+const SkeletonFilm:React.FC<SkeletonProps> = (props) => (
   <ContentLoader 
     speed={2}
     width={130}

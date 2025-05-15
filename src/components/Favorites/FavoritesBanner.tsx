@@ -1,7 +1,7 @@
 import blade from "../../assets/Blade Runner 2049(2).jpg";
 
 
-export default function FavoritesBanner(){
+const FavoritesBanner = ()=>{
     return (
         <div className="favorites__banner">
         <div className="gradient__overlay"></div>
@@ -9,3 +9,4 @@ export default function FavoritesBanner(){
       </div>
     )
 }
+export default FavoritesBanner

@@ -1,9 +1,10 @@
 import { useSelector } from "react-redux";
 import { searchParamInYouTube } from "../../tools/searchParamInYouTube";
 import SkeletonLoadingTrailer from "../Skeletons/SkeletonLoadingTrailer";
+import { RootState } from "../../Redux/store";
 
 export default function Video() {
-  const { searchFilm } = useSelector((store) => store.movies);
+  const { searchFilm } = useSelector((store:RootState) => store.movies);
 
   if (
     searchFilm.status === "loading" ||

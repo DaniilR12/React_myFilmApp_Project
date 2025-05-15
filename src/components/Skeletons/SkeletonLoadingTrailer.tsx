@@ -1,6 +1,9 @@
+import React from "react";
 import ContentLoader from "react-content-loader"
 
-const SkeletonLoadingTrailer = (props) => (
+export type SkeletonProps = React.ComponentProps<typeof ContentLoader>;
+
+const SkeletonLoadingTrailer:React.FC<SkeletonProps> = (props) => (
   <ContentLoader 
     speed={2}
     width={1309}

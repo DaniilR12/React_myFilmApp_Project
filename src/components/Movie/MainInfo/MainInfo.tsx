@@ -7,21 +7,24 @@ import MainInfoLeft from "./MainInfoLeft";
 import MainInfoRight from "./MainInfoRight";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { AppDispatch, RootState } from "../../../Redux/store";
 
 export default function MainInfo() {
-  const { id } = useParams();
-  const dispatch = useDispatch();
+  const { id } = useParams<{ id: string }>();
+  const dispatch: AppDispatch = useDispatch();
 
-  const {searchFilm ,status} = useSelector((store) => store.movies);
+  const { searchFilm, status } = useSelector(
+    (store: RootState) => store.movies
+  );
 
   useEffect(() => {
-    if(status === 'fulfilled'){
+    if (status === "fulfilled" && id) {
       dispatch(searchFilmInState({ id }));
     }
-  }, [dispatch, id,status]);
+  }, [dispatch, id, status]);
 
   if (searchFilm.status === "loading" || !searchFilm.film) {
-    return <p style={{color:'white'}}>Loading... Wait a minute...</p>;
+    return <p style={{ color: "white" }}>Loading... Wait a minute...</p>;
   }
 
   return (
