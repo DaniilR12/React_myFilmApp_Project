@@ -44,20 +44,10 @@ export default function Header() {
                 <img src={heart} alt="" />
                 <p>{favoritesMovies.length}</p>
               </div>
-              <Link to="/favorites">Hello {login}</Link>
-              <button
-                style={{
-                  borderRadius: 7,
-                  position: "absolute",
-                  top: 55,
-                  right: 92,
-                  width: 65,
-                  backgroundColor: "#c63737",
-                  color: "white",
-                  border: "none",
-                }}
-                onClick={handleLogout}
-              >
+              <Link className="favorites__movies_link" to="/favorites">
+                Hello {login}
+              </Link>
+              <button className="header_button_logout" onClick={handleLogout}>
                 Logout
               </button>
             </>

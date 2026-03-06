@@ -1,0 +1,17 @@
+
+@import './variables.css';
+
+@import './global.css';
+
+@import './header.css';
+@import './filter.css';
+@import './movies.css';
+@import './footer.css';
+@import './favorites.css';
+@import './movie-detail.css';
+
+@import './buttons.css';
+
+@import './modal.css';
+
+@import './auth.css';

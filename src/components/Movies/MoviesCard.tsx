@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import starEmpty from "../../assets/icons/starEmpty.png";
 import star from "../../assets/icons/star.png";
 import { Movie } from "../../Redux/slices/moviesSlice";
+import { memo } from "react";
 
-
-export default function MoviesCard(props:Movie) {
+function MoviesCard(props:Movie) {
   const id = props.id;
 
   function getAverageRating(movieId:string) {
@@ -18,7 +18,7 @@ export default function MoviesCard(props:Movie) {
   }
 
   const averageRating = getAverageRating(id);
-  const roundedRating = Math.round(averageRating); // округляем до целого числа звёзд
+  const roundedRating = Math.round(averageRating);
 
   return (
     <>
@@ -37,3 +37,5 @@ export default function MoviesCard(props:Movie) {
     </>
   );
 }
+
+export default memo(MoviesCard);

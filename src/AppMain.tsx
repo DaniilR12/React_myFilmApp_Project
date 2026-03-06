@@ -19,7 +19,7 @@ export default function AppMain() {
     dispatch(fetchMovies());
     const currentUser = JSON.parse(localStorage.getItem("currentUser")||'{}');
     if (currentUser) {
-      dispatch(initFavorites(currentUser.email)); // ✅ Теперь slice будет знать currentUser
+      dispatch(initFavorites(currentUser.email)); 
     }
   }, [dispatch]);
 

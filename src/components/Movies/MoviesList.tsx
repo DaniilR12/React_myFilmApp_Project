@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMovies, clearFilters } from "../../Redux/slices/moviesSlice";
 import { useLocation } from "react-router-dom";
@@ -8,7 +8,7 @@ import WeHaveProblem from "./WeHaveProblem";
 import MoviesCards from "./MoviesCards";
 import { AppDispatch, RootState } from "../../Redux/store";
 
-export default function MoviesList() {
+function MoviesList() {
   const location = useLocation();
   const dispatch:AppDispatch = useDispatch();
 
@@ -26,16 +26,14 @@ export default function MoviesList() {
     return () => clearTimeout(timeOutId);
   }, [dispatch]);
 
-  // Очищаем фильтры при переходе на избранное
   useEffect(() => {
     if (location.pathname === "/favorites") {
       dispatch(clearFilters());
-      // Дадим один тик на очистку
       setTimeout(() => {
         setIsFiltersCleared(true);
       }, 0);
     } else {
-      setIsFiltersCleared(true); // не favorites — можно сразу показывать
+      setIsFiltersCleared(true);
     }
   }, [location.pathname, dispatch]);
 
@@ -46,7 +44,7 @@ export default function MoviesList() {
       {isFavoritesPage ? (
         isFiltersCleared ? (
           <FavoriteMovies />
-        ) : null // ничего не рендерим до очистки
+        ) : null
       ) : status === "loading" ? (
         timeOut ? (
           <WeHaveProblem />
@@ -59,3 +57,5 @@ export default function MoviesList() {
     </div>
   );
 }
+
+export default memo(MoviesList);

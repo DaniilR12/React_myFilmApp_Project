@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { searchCategoriesFilms } from "../../Redux/slices/moviesSlice";
 import type { RootState, AppDispatch } from "../../Redux/store";
 
-export default function FilterButtons() {
+function FilterButtons() {
   const dispatch: AppDispatch = useDispatch();
 
   const { filmsCategory } = useSelector((store: RootState) => store.movies);
@@ -37,3 +37,5 @@ export default function FilterButtons() {
     </div>
   );
 }
+
+export default memo(FilterButtons);

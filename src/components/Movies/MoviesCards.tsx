@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import MoviesCard from "./MoviesCard";
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import { clearFilters } from "../../Redux/slices/moviesSlice";
 import { AppDispatch, RootState } from "../../Redux/store";
 
-export default function MoviesCards() {
+function MoviesCards() {
   const dispatch:AppDispatch = useDispatch();
   useEffect(() => {
     dispatch(clearFilters());
@@ -26,3 +26,5 @@ export default function MoviesCards() {
     </>
   );
 }
+
+export default memo(MoviesCards);

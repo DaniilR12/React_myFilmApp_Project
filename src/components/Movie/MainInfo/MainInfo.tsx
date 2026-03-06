@@ -1,20 +1,17 @@
-import { useEffect } from "react";
-import {
-  fetchMovies,
-  searchFilmInState,
-} from "../../../Redux/slices/moviesSlice";
+import { memo, useEffect } from "react";
+import { searchFilmInState } from "../../../Redux/slices/moviesSlice";
 import MainInfoLeft from "./MainInfoLeft";
 import MainInfoRight from "./MainInfoRight";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { AppDispatch, RootState } from "../../../Redux/store";
 
-export default function MainInfo() {
+function MainInfo() {
   const { id } = useParams<{ id: string }>();
   const dispatch: AppDispatch = useDispatch();
 
   const { searchFilm, status } = useSelector(
-    (store: RootState) => store.movies
+    (store: RootState) => store.movies,
   );
 
   useEffect(() => {
@@ -36,3 +33,5 @@ export default function MainInfo() {
     </div>
   );
 }
+
+export default memo(MainInfo);

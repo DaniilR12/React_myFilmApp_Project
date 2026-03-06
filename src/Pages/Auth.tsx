@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
+import { AuthInput } from "../components/Auth/authInput";
 
 const Auth = () => {
   const [login, setLogin] = useState<string>("");
@@ -10,25 +11,22 @@ const Auth = () => {
     e.preventDefault();
 
     if (isLogin) {
-      // Вход
       const savedUsers = JSON.parse(localStorage.getItem("users") || "[]");
       const user = savedUsers.find(
-        (u: any) => u.email === email && u.password === password
+        (u: any) => u.email === email && u.password === password,
       );
 
       if (user) {
         localStorage.setItem("token", "mock-token");
-        localStorage.setItem("currentUser", JSON.stringify(user)); // Сохраняем текущего пользователя
+        localStorage.setItem("currentUser", JSON.stringify(user));
         alert(`Hello, ${user.login}`);
         window.location.href = "/";
       } else {
         alert("Not correct email or password");
       }
     } else {
-      // Регистрация
       const savedUsers = JSON.parse(localStorage.getItem("users") || "[]");
 
-      // Проверка на уже существующего пользователя
       const isExist = savedUsers.some((u: any) => u.email === email);
       if (isExist) {
         alert("User already exists with this email!");
@@ -44,67 +42,17 @@ const Auth = () => {
 
   return (
     <>
-      <div style={{ paddingTop: 100, paddingBottom: 100, textAlign: "center" }}>
-        <h1 style={{ color: "white", textAlign: "center" }}>
-          {isLogin ? "Login" : "Registration"}
-        </h1>
-        <form
-          onSubmit={handleSubmit}
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: 10,
-            alignItems: "center",
-            paddingTop: 5,
-          }}
-        >
+      <div className="auth_container">
+        <h1 className="auth_h1">{isLogin ? "Login" : "Registration"}</h1>
+        <form onSubmit={handleSubmit} className="auth_form">
           {!isLogin && (
-            <input
-              onChange={(e) => setLogin(e.target.value)}
-              style={{
-                color: "black",
-                border: "none",
-                borderRadius: 10,
-                height: 25,
-                paddingLeft: 10,
-                width: 150,
-              }}
-              type="text"
-              placeholder="Login"
-              required
-            ></input>
+            <AuthInput onChange={setLogin} placeholder="Login" value={login} />
           )}
 
-          <input
-            onChange={(e) => setEmail(e.target.value)}
-            style={{
-              color: "black",
-              border: "none",
-              borderRadius: 10,
-              height: 25,
-              paddingLeft: 10,
-              width: 150,
-            }}
-            type="email"
-            placeholder="Email"
-            required
-          ></input>
-          <input
-            onChange={(e) => setPassword(e.target.value)}
-            style={{
-              color: "black",
-              border: "none",
-              borderRadius: 10,
-              height: 25,
-              paddingLeft: 10,
-              width: 150,
-            }}
-            type="password"
-            placeholder="Password"
-            required
-          ></input>
+          <AuthInput onChange={setEmail} placeholder="email" value={email} />
+          <AuthInput onChange={setPassword} placeholder="Password" value={password} />
           <button
-            style={{ width: 100, border: "none", height: 20, borderRadius: 10 }}
+            className="auth_button"
           >
             Submit
           </button>
@@ -133,4 +81,4 @@ const Auth = () => {
   );
 };
 
-export default Auth;
+export default memo(Auth);

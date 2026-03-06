@@ -3,7 +3,7 @@
     "target": "ESNext",
     "module": "ESNext",
     "lib": ["DOM", "ESNext"],
-    "jsx": "react-jsx",             // <-- для React 17+ с JSX без импорта React
+    "jsx": "react-jsx",         
     "moduleResolution": "Node",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,

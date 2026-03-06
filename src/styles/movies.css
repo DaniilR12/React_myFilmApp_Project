@@ -1,0 +1,87 @@
+
+.movies {
+    margin-top: var(--spacing-lg);
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: var(--spacing-lg);
+    justify-content: space-between;
+}
+
+.movies__card {
+    display: block;
+    width: var(--card-width);
+    height: var(--card-height);
+    position: relative;
+    text-decoration: none;
+}
+
+.movies__card > img {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    border-radius: var(--radius-md);
+    transition: var(--transition-normal);
+}
+
+.movies__card > img:hover {
+    opacity: 0.6;
+}
+
+.movies__card-rating {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    gap: var(--spacing-xs);
+    padding: 3px 0px;
+    z-index: 1;
+    background-color: var(--color-overlay);
+    width: 100%;
+}
+
+.movies__card-rating > img {
+    display: block;
+    width: 19px;
+    height: 19px;
+}
+
+.movies__scroll {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.movies__scroll > button {
+    width: var(--button-height);
+    height: var(--button-height);
+    border-radius: var(--radius-full);
+    border: 0px;
+    background-color: var(--color-secondary);
+    color: var(--color-text);
+    cursor: pointer;
+    font-family: var(--font-family);
+    font-size: 15px;
+    transition: var(--transition-normal);
+}
+
+.movies__scroll > button:hover {
+    background-color: var(--color-text-light);
+}
+
+.loading {
+    opacity: 0.6;
+}
+
+.we-have-problem {
+    text-align: center;
+    color: var(--color-text);
+    font-family: var(--font-family);
+    padding: var(--spacing-lg);
+}

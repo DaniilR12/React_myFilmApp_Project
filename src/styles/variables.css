@@ -1,0 +1,59 @@
+:root {
+    --color-primary: #000000;      
+    --color-secondary: #222127;   
+    --color-accent: #FF0A1D;   
+    --color-accent-dark: #C01616;  
+    --color-accent-warning: #B7140F; 
+    --color-text: #ffffff;        
+    --color-text-muted: #9EA2A8;   
+    --color-text-light: #626262;   
+    --color-border: #454545;       
+    --color-border-light: #43464B;
+    --color-overlay: rgba(0, 0, 0, 0.78);
+    --color-overlay-dark: rgba(0, 0, 0, 0.7); 
+
+    --font-family: "Inter", sans-serif;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-bold: 600;
+    --font-weight-extra-bold: 900;
+
+    --font-size-xs: 11px;
+    --font-size-sm: 13px;
+    --font-size-base: 16px;
+    --font-size-md: 19px;
+    --font-size-lg: 20px;
+    --font-size-xl: 23px;
+    --font-size-2xl: 25px;
+    --font-size-3xl: 27px;
+    --font-size-4xl: 36px;
+    --font-size-5xl: 96px;
+    --font-size-button: 13px;
+
+    --spacing-xs: 5px;
+    --spacing-sm: 10px;
+    --spacing-md: 15px;
+    --spacing-lg: 25px;
+    --spacing-xl: 35px;
+    --spacing-2xl: 80px;
+
+    --radius-xs: 5px;
+    --radius-sm: 7px;
+    --radius-md: 10px;
+    --radius-lg: 30px;
+    --radius-xl: 32px;
+    --radius-full: 50%;
+
+    --header-height: 80px;
+    --card-width: 130px;
+    --card-height: 200px;
+    --button-height: 40px;
+
+    --transition-fast: 0.1s ease;
+    --transition-normal: 0.2s ease;
+    --transition-slow: 0.4s ease;
+    --transition-extra-slow: 0.5s ease;
+
+    --shadow-glow-red: 0 0 15px #C01616;
+    --shadow-glow-light: 0 0 20px #e3dddd;
+}

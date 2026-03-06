@@ -1,7 +1,7 @@
 import { addFavoritesMovie, removeFavoritesMovie, initFavorites } from "../../../Redux/slices/favoritesSlice";
 import Rating from "../Rating";
 import { useDispatch } from "react-redux";
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import { useNavigate } from "react-router-dom";
 import { AppDispatch } from "../../../Redux/store";
 import { Movie } from "../../../Redux/slices/moviesSlice";
@@ -13,16 +13,15 @@ export interface MainInfoLeftProps {
   };
 }
 
-export default function MainInfoLeft({searchFilm}:MainInfoLeftProps) {
+function MainInfoLeft({searchFilm}:MainInfoLeftProps) {
   const dispatch:AppDispatch = useDispatch();
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState<boolean>(false);
   const currentUser = JSON.parse(localStorage.getItem("currentUser")||"null");
 
   useEffect(() => {
-    // При монтировании компонента инициализируем пользователя
     if (currentUser) {
-      dispatch(initFavorites(currentUser.email)); // ✅ Теперь slice будет знать currentUser
+      dispatch(initFavorites(currentUser.email));
     }
   }, [dispatch]);
 
@@ -76,7 +75,6 @@ export default function MainInfoLeft({searchFilm}:MainInfoLeftProps) {
         </div>
       </div>
 
-      {/* Модалка */}
       {showModal && (
         <div className="modal-overlay">
           <div className="modal">
@@ -93,3 +91,5 @@ export default function MainInfoLeft({searchFilm}:MainInfoLeftProps) {
     </>
   );
 }
+
+export default memo(MainInfoLeft);

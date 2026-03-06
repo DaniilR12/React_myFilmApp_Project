@@ -1,0 +1,207 @@
+
+header {
+    position: fixed;
+    transition: var(--transition-slow);
+    background-color: var(--color-primary);
+    width: 100%;
+    z-index: 1000;
+    padding: 22px var(--spacing-2xl);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+
+.header__logo-flex {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    text-decoration: none;
+}
+
+.header__logo-flex > img {
+    display: block;
+    width: 38px;
+}
+
+.header__logo-flex_sitename {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.header__logo-flex_sitename > p {
+    font-size: var(--font-size-lg);
+    font-family: var(--font-family);
+    font-weight: var(--font-weight-extra-bold);
+    color: var(--color-text);
+    line-height: 90%;
+    margin-bottom: 0;
+}
+
+.header__navbar-flex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-md);
+}
+
+.header__navbar-flex > a {
+    color: var(--color-text);
+    text-decoration: none;
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
+}
+
+.favorites__movies {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.favorites__movies > img {
+    display: block;
+    width: 25px;
+}
+
+.favorites__movies > p {
+    color: var(--color-text);
+    font-family: var(--font-family);
+    font-size: var(--font-size-md);
+}
+
+.favorites__movies_link{
+    margin-right: 20px;
+}
+
+.header__auth-flex {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacing-sm);
+    justify-content: center;
+}
+
+.header__auth-flex > a {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-normal);
+    text-decoration: none;
+    color: var(--color-text);
+    font-family: var(--font-family);
+}
+
+.header__banner {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    align-items: center;
+}
+
+.header__banner > video {
+    display: block;
+    position: absolute;
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
+    opacity: 1;
+}
+
+.header__banner > img {
+    display: block;
+    position: absolute;
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
+    opacity: 0.72;
+}
+
+.header__banner > img:last-child {
+    opacity: 0.52;
+}
+
+.header__banner > div {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    z-index: 1;
+    max-width: 844px;
+    margin-left: var(--spacing-2xl);
+}
+
+.header__banner > div > p:first-child {
+    font-size: var(--font-size-5xl);
+    font-weight: bold;
+    color: var(--color-text);
+    font-family: var(--font-family);
+}
+
+.header__banner > div > p:last-of-type {
+    font-size: var(--font-size-2xl);
+    font-weight: 500;
+    color: var(--color-text);
+    font-family: var(--font-family);
+}
+
+.header__banner > div > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 27px;
+    margin-top: 26px;
+}
+
+.header__banner > div > div > button,
+.header__banner > div > div > a {
+    display: block;
+    padding-left: 32px;
+    padding-right: 32px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    background-color: var(--color-primary);
+    border-radius: 49px;
+    border: 0px;
+    cursor: pointer;
+    color: var(--color-text);
+    font-size: var(--font-size-md);
+    text-decoration: none;
+    font-family: var(--font-family);
+    transition: var(--transition-normal);
+}
+
+.header__banner > div > div > a:hover,
+.header__banner > div > div > button:hover {
+    background-color: #141414;
+}
+
+.header__banner > div > div > button:last-of-type {
+    background-color: var(--color-accent-dark);
+}
+
+.header__banner > div > div > button:last-of-type:hover {
+    box-shadow: var(--shadow-glow-red);
+}
+
+.header_button_logout {
+    border-radius: 7px;
+    position: absolute;
+    top: 26px;
+    right: 12px;
+    width: 72px;
+    height: 30px;
+    background-color: #c63737;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.header_button_logout:hover {
+    background-color: red;
+    color: white;
+    transition: all 0.3s ease;
+}
